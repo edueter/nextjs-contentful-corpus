@@ -1,64 +1,65 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+// pages/index.js
+// import client for contentful
+import client from '../lib/contentful-client'
 
-export default function Home() {
+import Section from '../components/sections'
+// Import Next.js components
+import Head from 'next/head'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+
+// Set content for the page
+export async function getStaticProps() {
+  let data = await client.getEntries({
+    content_type: 'paginas',
+    'fields.slug': 'inicio'
+  })
+  return {
+    props: {
+      pagina: data.items[0]
+    }
+  }
+}
+
+export default function Home({ pagina }) {
+  console.log(pagina)
+
+  const { titulo, slug, secoes } = pagina.fields
+
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>Create Next App</title>
+        <title>{titulo} | Corpus - Fisioterapia & Pilates</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <main id={slug}>
+        
+        {secoes.map(secao => {
+          const { 
+            slug, 
+            titulo,
+            subtitulo,
+            conteudo,
+            componentes,
+          } = secao.fields
+          const { id } = secao.sys
+          return (
+            <Section 
+              key={slug}
+              slug={slug} 
+              titulo={titulo} 
+              subtitulo={subtitulo} 
+              conteudo={conteudo} 
+              componentes={componentes} 
+              id={id}
+              />
+          )
+        })}
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
       </main>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
+      <footer >
+        (footer)
       </footer>
     </div>
   )
