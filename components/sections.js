@@ -1,7 +1,6 @@
 // components/sections.js
 import PropTypes from "prop-types";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import getEntry from '../helpers/loaders/entry'
 
 export const Section = ({
   slug, 
@@ -22,7 +21,7 @@ export const Section = ({
           const { id } = componente.sys
           return (
             <li key={id}>
-              {getEntry(id)}
+              Item com a id: {id}
             </li>
             )
          })}
