@@ -2,6 +2,8 @@
 import PropTypes from "prop-types";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
+
+
 export const Section = ({
   slug, 
   titulo,
@@ -22,6 +24,8 @@ export const Section = ({
           return (
             <li key={id}>
               Item com a id: {id}
+              {console.log(componente)}
+
             </li>
             )
          })}
