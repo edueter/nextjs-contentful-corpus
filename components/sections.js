@@ -1,33 +1,19 @@
 // components/sections.js
-import PropTypes from "prop-types";
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+// import PropTypes from "prop-types";
+// import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
-export const Section = ({
-  slug, 
-  titulo,
-  subtitulo,
-  conteudo,
-  componentes,
-  id
-}) => {
-  
+export const RenderSection = ({ data }) => {
+  const { titulo, slug, subtitulo} = data.fields
+
   return (
-    <section id={slug} key={id}>
-      <h1>{titulo}</h1>
-      <h2>{subtitulo}</h2>
-      <div>{documentToReactComponents(conteudo)}</div>
-      
-      
+    <section id={slug}>
+      <h1>Essa é a seção {slug}</h1>
+      <h2>Com o título {titulo},</h2>
+      <h2>subtítulo {subtitulo}</h2>
     </section>
   )
 }
-Section.propTypes = {
-  componentes: PropTypes.any.isRequired,
-  conteudo: PropTypes.any.isRequired,
-  slug: PropTypes.any.isRequired,
-  subtitulo: PropTypes.any.isRequired,
-  titulo: PropTypes.any.isRequired
-}
 
 
-export default Section
+
+export default RenderSection
