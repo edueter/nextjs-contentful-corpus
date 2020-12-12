@@ -1,0 +1,16 @@
+sentences.forEach((sentence) => {
+      content.sentences.push({
+        text: sentence,
+        keywords: [],
+        images: [],
+      });
+    });
+
+eu acho que seguindo sua logia ficaria algo asssim:
+
+ seções {
+    componentes {
+      compA
+      compB
+
+página => map => forEach section => forEach component

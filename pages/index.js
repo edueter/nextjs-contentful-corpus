@@ -6,6 +6,7 @@ import Section from '../components/sections'
 // Import Next.js components
 import Head from 'next/head'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import contentfulClient from '../lib/contentful-client'
 
 // Set content for the page
 export async function getStaticProps() {
@@ -19,11 +20,14 @@ export async function getStaticProps() {
     }
   }
 }
-
 export default function Home({ pagina }) {
   console.log(pagina)
 
   const { titulo, slug, secoes } = pagina.fields
+
+  secoes.forEach((secao) => {
+    contentfulClient.getEntry(secao.sys.id).then((entry) => console.log(entry))
+  })
 
   return (
     <div>
@@ -42,6 +46,8 @@ export default function Home({ pagina }) {
             conteudo,
             componentes,
           } = secao.fields
+
+
           const { id } = secao.sys
           return (
             <Section 
