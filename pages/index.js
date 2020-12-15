@@ -1,8 +1,8 @@
 // pages/index.js
 // import client for contentful
-import client from '../lib/contentful-client'
+import client, { parseEntries } from '../lib/contentful-client'
 
-import RenderSection from '../components/sections'
+import SectionRenderer from '../components/sections'
 // Import Next.js components
 import Head from 'next/head'
 import contentfulClient from '../lib/contentful-client'
@@ -11,7 +11,8 @@ import contentfulClient from '../lib/contentful-client'
 export async function getStaticProps() {
   let data = await contentfulClient.getEntries({
     content_type: 'paginas',
-    'fields.slug': 'inicio'
+    'fields.slug': 'inicio',
+    include: 6
   })
   return {
     props: {
@@ -23,8 +24,6 @@ export async function getStaticProps() {
 export default function Home({ pagina }) {
   
   const { titulo, slug, secoes } = pagina.fields 
-  console.log("Seções ____________________")
-  console.log(secoes)
 
   return (
     <div>
@@ -32,18 +31,16 @@ export default function Home({ pagina }) {
         <title>{titulo} | Corpus - Fisioterapia & Pilates</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <main id={slug}>
         {secoes.map((secao) => {
-          contentfulClient.getEntry(secao.sys.id).then((entry) => {
-            console.log(`>>   Seção ${entry.fields.slug}`)
-            console.log(entry);            
-          });
+          console.log(">> Seção " + secao.fields.slug)
+          console.log(secao)
+          return <SectionRenderer key={secao.fields.slug} secao={secao} />
         })}
       </main>
-    <footer >
+      <footer >
         (footer)
-    </footer>
+      </footer>
     </div>
   )
 }

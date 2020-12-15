@@ -1,9 +1,22 @@
 // components/sections.js
-// import PropTypes from "prop-types";
-// import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
-export const RenderSection = ({ data }) => {
-  const { titulo, slug, subtitulo} = data.fields
+// Grid of sections for the first page (index)
+
+export const SectionRenderer = ({ secao }) => {
+  const { titulo, slug, subtitulo} = secao.fields
+
+  switch(secao.fields.slug) {
+    case 'hero':
+      return 'Hero';
+    case 'fisioterapia-home':
+      return 'fisio';
+    case 'pilates':
+      return 'pilates';
+    case 'central-de-atendimento':
+      return 'central-de-atendimento';
+    default:
+      return 'nothing came from render'
+  }
 
   return (
     <section id={slug}>
@@ -16,4 +29,4 @@ export const RenderSection = ({ data }) => {
 
 
 
-export default RenderSection
+export default SectionRenderer
