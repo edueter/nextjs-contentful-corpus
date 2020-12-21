@@ -6,6 +6,7 @@ import SectionRenderer from '../components/sections'
 // Import Next.js components
 import Head from 'next/head'
 import contentfulClient from '../lib/contentful-client'
+import Layout from '../components/layout'
 
 // Set content for the page
 export async function getStaticProps() {
@@ -31,16 +32,14 @@ export default function Home({ pagina }) {
         <title>{titulo} | Corpus - Fisioterapia & Pilates</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main id={slug}>
+      <Layout id={slug}>
+        
         {secoes.map((secao) => {
           console.log(">> Seção " + secao.fields.slug)
           console.log(secao)
           return <SectionRenderer key={secao.fields.slug} secao={secao} />
         })}
-      </main>
-      <footer >
-        (footer)
-      </footer>
+      </Layout>
     </div>
   )
 }
