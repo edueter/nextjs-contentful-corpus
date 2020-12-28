@@ -4,7 +4,7 @@ export const Layout = ({ children, id }) => {
   return (
     <Box 
       className="site--wrapper layout">
-      <Box as="main" id={id} overflowX="hidden" borderTopColor="primary.500" borderTopStyle="solid" borderTopWidth={ id === 'inicio' ? '.5rem' : 'none'}>
+      <Box as="main" id={id} overflow="hidden" borderTopColor="primary.500" borderTopStyle="solid" borderTopWidth={ id === 'inicio' ? '.5rem' : 'none'}>
         {children}
       </Box>
       <Box as="footer" >

@@ -7,6 +7,7 @@ import SectionRenderer from '../components/sections'
 import Head from 'next/head'
 import contentfulClient from '../lib/contentful-client'
 import Layout from '../components/layout'
+import Whatsapp from '../components/modais/whatsapp'
 
 // Set content for the page
 export async function getStaticProps() {
@@ -33,7 +34,7 @@ export default function Home({ pagina }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout id={slug}>
-        
+        <Whatsapp />
         {secoes.map((secao) => {
           console.log(">> Seção " + secao.fields.slug)
           console.log(secao)

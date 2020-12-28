@@ -65,6 +65,21 @@ const theme = extendTheme({
       800: '#2A3F50',
       900: '#1C2A35',
     },
+    whatsapp: {
+      tealgreen: {
+        1: '#128C7E',
+        2: '#075E54',
+      },
+      lightgreen: { 
+        1: '#25D366', 
+        2: '#179848',
+      },
+      beige: {
+        1: '#ECE5DD',
+        2: '#f0f0f0',
+      },
+      blue: '#Checkmark Blue',
+    },
   },
   fonts: {
     display: "Rubik, sans-serif",

@@ -1,5 +1,6 @@
 // components/sections.js
 import Hero from '../components/home/hero'
+import FisioHome from '../components/home/fisio'
 
 // Grid of sections for the first page (index)
 export const SectionRenderer = ({ secao }) => {
@@ -9,7 +10,7 @@ export const SectionRenderer = ({ secao }) => {
     case 'hero':
       return <Hero secao={secao} />;
     case 'fisioterapia-home':
-      return 'fisio';
+      return <FisioHome secao={secao} />;
     case 'pilates':
       return 'pilates';
     case 'central-de-atendimento':
