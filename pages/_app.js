@@ -78,7 +78,7 @@ const theme = extendTheme({
         1: '#ECE5DD',
         2: '#f0f0f0',
       },
-      blue: '#Checkmark Blue',
+      blue: '#34B7F1',
     },
   },
   fonts: {
@@ -91,7 +91,8 @@ const theme = extendTheme({
         fontSize: "18px",
         //color: "gray.600",
         //lineHeight: "tall",
-      }
+      },
+      
       //a: {
       //  color: "teal.500",
       //},

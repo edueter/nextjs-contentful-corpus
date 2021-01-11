@@ -69,7 +69,7 @@ const FisioHome = ({ secao }) => {
             letterSpacing="normal"
             fontWeight="200"
             whiteSpace="break-spaces"
-            wordBreak="break-word"
+            wordBreak="break-words"
             textAlign="left"
             _notFirst={{ mt: 2 }}
             w="100%">{children}</Text>
@@ -92,15 +92,12 @@ const FisioHome = ({ secao }) => {
     },
   }
   
-  console.log(secao.fields)
   const { subtitulo, conteudo, slug, componentes } = secao.fields
 
-  const Card = ({ card, key }) => {
+  const Card = ({ card }) => {
     const { link, titulo, conteudo, textoDoLink } = card.fields
     return (
       <Link 
-        
-        key={key}
         href={'/${link}'}>
         <Flex 
           mt={[10]}
@@ -152,8 +149,7 @@ const FisioHome = ({ secao }) => {
       position="relative" 
       maxW="100%"
       mt={[20, 60, , ,]} 
-      minH={['auto', '', '', '100vh']} 
-      id={secao}>
+      minH={['auto', '', '', '100vh']}>
       <AspectRatio 
         className="background--image"
         pos="absolute"
@@ -194,7 +190,7 @@ const FisioHome = ({ secao }) => {
             gridArea="cards"
             templateColumns={['auto', 'repeat(auto-fill, minmax(45%, 1fr))', , 'repeat(auto-fill, minmax(28%, 1fr))', '']} >
             {componentes.slice(1,4).map((card, i) => {
-              return (<Card card={card} key={i} />)
+              return (<Card key={i} card={card} />)
             })}
           </Grid>
         </Grid>

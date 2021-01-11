@@ -87,11 +87,12 @@ const Hero = ({ secao }) => {
             h={['auto', '', 'fit-content', "70%"]}>
             <Heading 
               as="h1" 
-              maxW={['', '', '12ch', '38ch' ]} 
+              maxW={['12ch', '28ch', '12ch', '28ch' ]} 
               fontFamily="display" 
-              fontSize={['2xl', '3xl', '4xl']} 
+              fontSize={['4xl', '4xl']} 
               fontWeight="500"
               letterSpacing="tight" 
+              lineHeight="1em"
               color="primary.500" 
               >
               {titulo} <Text fontWeight="600" as="span"><Typewriter>{componentes[1].fields.palavras}</Typewriter></Text>
