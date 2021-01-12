@@ -21,7 +21,7 @@ const Pilates = ({ secao }) => {
       [BLOCKS.PARAGRAPH]: (_node, children) => {
         return (
           <Text 
-            color="corpus-grayish-blue.700" 
+            color="grayBlue.700" 
             fontSize="sm"
             lineHeight="1.68em" 
             letterSpacing="normal"
@@ -58,7 +58,7 @@ const Pilates = ({ secao }) => {
     <Box 
       as="section" 
       id={slug} 
-      bgColor="corpus-baby-blue.200"
+      bgColor="babyBlue.200"
       position="relative" 
       maxW="100%"
       h="100%"

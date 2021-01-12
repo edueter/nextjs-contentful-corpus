@@ -43,7 +43,7 @@ const theme = extendTheme({
       800: '#6C6C68',
       900: '#484845',
     },
-    'corpus-baby-blue': {
+    babyBlue: {
       100: '#F6FAFF',
       200: '#E8F3FE',
       300: '#DAECFD',
@@ -54,7 +54,7 @@ const theme = extendTheme({
       800: '#495E71',
       900: '#313E4B',
     },
-    'corpus-grayish-blue': {
+    grayBlue: {
       100: '#EFF3F7',
       200: '#D7E2EC',
       300: '#BED1E0',

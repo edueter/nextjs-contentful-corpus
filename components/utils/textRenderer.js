@@ -20,7 +20,7 @@ export const options = {
             <Text
               fontSize="md"
               fontFamily="body"
-              color="corpus-grayish-blue.700"
+              color="grayBlue.700"
               letterSpacing="normal"
               lineHeight={6}
               fontWeight="400"

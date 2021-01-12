@@ -27,7 +27,7 @@ const FisioHome = ({ secao }) => {
       [BLOCKS.PARAGRAPH]: (_node, children) => {
         return (
           <Text 
-            color="corpus-grayish-blue.700" 
+            color="grayBlue.700" 
             fontSize="sm"
             lineHeight="1.68em" 
             letterSpacing="normal"
@@ -62,7 +62,7 @@ const FisioHome = ({ secao }) => {
       [BLOCKS.PARAGRAPH]: (_node, children) => {
         return (
           <Text 
-            color="corpus-grayish-blue.700" 
+            color="grayBlue.700" 
             fontSize="md"
             lineHeight="1.45em" 
             fontFamily="display"
