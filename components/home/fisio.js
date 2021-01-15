@@ -154,8 +154,8 @@ const FisioHome = ({ secao }) => {
         className="background--image"
         pos="absolute"
         zIndex="-50"
-        top={[,'18px', '-42px', '0',  '10']}
-        left={[,'-58%', '-44%', '-57%', '-50%']}
+        top={[,'-18px', '-42px', '0',  '10']}
+        left={[,'-58%', '-44%', '-57%', '-46%']}
         width={[,'85%', '69%', '80%', '70%']}
         ratio={1400/996}>
         <Image 

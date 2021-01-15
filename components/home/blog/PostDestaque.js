@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Box, Flex, AspectRatio, UnorderedList, chakra, Text, Spacer, HStack, Stack } from '@chakra-ui/react';
+import { Box, Flex, AspectRatio, UnorderedList, chakra, Text, Spacer, HStack, Stack, Heading } from '@chakra-ui/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
@@ -50,12 +50,12 @@ function PostDestaque({ post }) {
           />
       </AspectRatio>
       <Flex 
-      boxShadow="xl"
+        boxShadow="xl"
         pos={["relative", , "absolute"]} 
         right={0} 
         top={[, , '4%', ,"8%" ]}
         bottom={[, , , "8%" ]}
-        bgColor="white" 
+        bgColor="grayBlue.100" 
         py={5}
         px={4}
         role="group"
@@ -68,14 +68,16 @@ function PostDestaque({ post }) {
         transform="scale(.95)"
         transition={transitions.principal}
         _groupHover={{
-          transform: 'scale(1)'
+          transform: 'scale(1)',
+          bgColor: 'white'
         }}>
         <UnorderedList 
           w="fit-content"
           h={8}
           pos="relative"
           ml={-5}
-          px={5}
+          pl={5}
+          pr={3}
           pt="3px"
           _before={{
             content: '""',
@@ -100,24 +102,24 @@ function PostDestaque({ post }) {
             pos: 'absolute',
             top: 0,
             bottom: 0,
-            right: 0,
+            right: "-20px",
             h: 0,
             w: 0,
-            borderLeftWidth: 8,
-            borderRightWidth: 8,
+            borderLeftWidth: 10,
+            borderRightWidth: 10,
             borderTopWidth: 19,
-            borderBottomWidth: 19,
+            borderBottomWidth: 18,
             borderStyle: "solid",
-            borderLeftColor: 'transparent',
-            borderRightColor: 'white',
-            borderTopColor: 'white',
-            borderBottomColor: 'white',
+            borderLeftColor: 'secondary.300',
+            borderRightColor: 'transparent',
+            borderTopColor: 'transparent',
+            borderBottomColor: 'transparent',
           }}
           bgColor="secondary.300">
           {categorias.map((categoria, i) => {
             const { nome, slug } = categoria.fields
             return (
-              <Link href={slug}>
+              <Link href={`/blog/categoria/${slug}`} key={i}>
                 <chakra.a
                   color="primary.600"
                   fontFamily="display"
@@ -157,23 +159,29 @@ function PostDestaque({ post }) {
             flexBasis="30%" 
             textAlign="right" 
             fontFamily="display" 
-
             cursor="pointer"
             color="primary.300"><FormatData dataHora={dataHora}/></Text>
         </Link>
         <Stack mb={[8, , 0]} h="60%">
-          <chakra.h3 
-          color="primary.500"
-          fontWeight="600"
-          letterSpacing="tight"
-          fontSize="xl"
-          >{titulo}</chakra.h3>
-          <Text
-            as="span"
-            color="grayBlue.700"
-            fontWeight="400"
-            fontSize="sm"
-          >Por: {autor.fields.nome}</Text>
+          <Link href={`/blog/${slug}`}>
+          <Heading
+            as="h3"
+            color="primary.500"
+            fontWeight="600"
+            letterSpacing="tight"
+            fontSize="xl"
+            cursor="pointer"
+            >{titulo}</Heading>
+          </Link>
+          <Link href={`/blog/autor/${autor.fields.slug}`}>
+            <Text
+              as="span"
+              color="grayBlue.700"
+              fontWeight="400"
+              fontSize="sm"
+              cursor="pointer"
+              >Por: {autor.fields.nome}</Text>
+          </Link>
           <Spacer flexBasis="100%" />
           {documentToReactComponents(excerpt, {
             renderMark: {

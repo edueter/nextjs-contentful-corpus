@@ -85,7 +85,94 @@ const theme = extendTheme({
     display: "Rubik, sans-serif",
     body: "Open Sans, sans-serif"
   },
+  components: {
+    Heading: {
+      baseStyle: {
+        fontFamily: 'display',
+        fontWeight: '400',
+        color: 'primary.500',
+        letterSpacing: 'tight'
+      }
+    },
+    Button: {
+      baseStyle: {
+        fontFamily: 'display',
+        fontWeight: '300',
+        letterSpacing: 'wider',
+        borderRadius: 'sm',
+        py: 4,
+        px: 6,
+      }
+    },
+    Input: {
+      baseStyle: {
+        fontFamily: 'display',
+        borderColor: 'primary.500',
+        variant: 'flushed',
+        color: 'primary.500'
+      },
+      variants: {
+        flushed: {
+          field: {
+            borderColor: 'primary.500',
+            pl: 1
+          }
+        }
+      },
+      defaultProps: {
+        size: 'md',
+        variant: 'flushed',
+      },
+    },
+    Textarea: {
+      baseStyle: {
+        fontFamily: 'display',
+        color: 'primary.500',
+        borderColor: 'primary.500',
+        _placeholder: {
+          color: 'primary.500'
+        }
+      },
+      variants: {
+        flushed: {
+          field: {
+            borderColor: 'primary.500',
+          },
+        }
+      },
+      defaultProps: {
+        size: 'md',
+        variant: 'flushed',
+      },
+    },
+    Select: {
+      baseStyle: {
+        fontFamily: 'display',
+        color: 'primary.500',
+        borderColor: 'primary.500',
+        variant: 'flushed',
+        _placeholder: {
+          color: 'primary.500'
+        },
+      },
+      variants: {
+        flushed: {
+          field: {
+            borderColor: 'primary.500',
+            pl: 1,
+            color: 'primary.500',
+          },
+          
+        }
+      },
+      defaultProps: {
+        size: 'md',
+        variant: 'flushed',
+      },
+    }
+  },
   styles: {
+    
     global: {
       'html': {
         fontSize: "18px",
