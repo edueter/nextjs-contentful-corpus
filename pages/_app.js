@@ -1,6 +1,6 @@
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import { FormspreeProvider } from '@formspree/react'
 //import { createBreakpoints } from "@chakra-ui/theme-tools"
-
 
 const theme = extendTheme({
   breakpoints: {
@@ -70,8 +70,8 @@ const theme = extendTheme({
         1: '#128C7E',
         2: '#075E54',
       },
-      lightgreen: { 
-        1: '#25D366', 
+      lightgreen: {
+        1: '#25D366',
         2: '#179848',
       },
       beige: {
@@ -162,7 +162,7 @@ const theme = extendTheme({
             pl: 1,
             color: 'primary.500',
           },
-          
+
         }
       },
       defaultProps: {
@@ -172,14 +172,14 @@ const theme = extendTheme({
     }
   },
   styles: {
-    
+
     global: {
       'html': {
         fontSize: "18px",
         //color: "gray.600",
         //lineHeight: "tall",
       },
-      
+
       //a: {
       //  color: "teal.500",
       //},
@@ -189,9 +189,11 @@ const theme = extendTheme({
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider resetCSS theme={theme}>
-      <Component {...pageProps} />
-    </ChakraProvider>
+    <FormspreeProvider project={process.env.NEXT_PUBLIC_FORMSPREE_PROJECT_ID}>
+      <ChakraProvider resetCSS theme={theme}>
+        <Component {...pageProps} />
+      </ChakraProvider>
+    </FormspreeProvider>
   )
 }
 
