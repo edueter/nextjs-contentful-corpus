@@ -30,7 +30,7 @@ const Hero = ({ secao }) => {
       [BLOCKS.PARAGRAPH]: (_node, children) => {
         return (
           <Text 
-            color="corpus-grayish-blue.700" 
+            color="grayBlue.700" 
             fontSize={['1rem', '', "1.1275rem"]}
             lineHeight="1.68em" 
             letterSpacing="normal"

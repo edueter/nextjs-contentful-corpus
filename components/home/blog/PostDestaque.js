@@ -1,101 +1,229 @@
 import PropTypes from "prop-types";
-import { usePrefersReducedMotion, Box, keyframes } from '@chakra-ui/react';
-import { RibbonCategoria, RibbonCurve, RibbonTitulo } from './ribbons';
-import { BlockWithExcerpt } from './blocos';
-import { PostImage } from './Imagens';
+import { Box, Flex, AspectRatio, UnorderedList, chakra, Text, Spacer, HStack, Stack, Heading } from '@chakra-ui/react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { BLOCKS, MARKS } from '@contentful/rich-text-types'
+import FormatData from '../../utils/formatData'
 
 function PostDestaque({ post }) {
-  console.log(post.fields.imagemDestaque)
-  const { titulo, slug, excerpt, autor, categorias, imagemDestaque } = post.fields;
+  
+  const { titulo, slug, excerpt, autor, dataHora, categorias, imagemDestaque } = post.fields;
+  const { url, details } = imagemDestaque.fields.arquivo.fields.file
+  const { width, height } = details.image
+  const { acessibilidade } = imagemDestaque.fields
 
-  // General config for home of blog
-  const zIndex = {
-    ribbonCurve: 10,
-    postImage: 50,
-    ribbonText: 90
-  };
-  const transition = {
-    timer: '.25s cubic-bezier(0.65, 0.05, 0.36, 1)',
-    delayed: '.45s .5s cubic-bezier(0.65, 0.05, 0.36, 1)',
-  };
-  const colors = {
-    ribbon: 'white',
-    ribbonAutor: 'primary.100',
-    curve: 'primary.100',
-    text: 'primary.400',
-    categorias: {
-      effect: 'secondary.500',
-      hover: {
-        effect: 'white'
-      },
-    },
-    hover: {
-      ribbon: 'primary.100',
-      curve: 'primary.200',
-      text: 'primary.700',
-    }
-  };
-
-  const bounce = keyframes`
-      from { transform: translateY(0px); }
-      50% { transform: translateY(-4px); }
-      to { transform: translateY(0px); }
-    `;
-
-  const motion = usePrefersReducedMotion();
-  const animation = motion
-    ? ''
-    : `${bounce} infinite 1s linear`;
+ 
+  const transitions = {
+    principal: "all .25s .05s ease-in-out",
+    links: "all .25s .15s ease-in-out"
+  }
 
   return (
-    <Link href={slug}>
-      <Box
-        className="post--principal"
-        h="auto"
-        pos="relative"
+    
+    <Flex
+      className="post--principal"
+      h="auto"
+      pos="relative"
+      role="group"
+      flexDirection="row"
+      flexWrap="wrap"
+      gridArea="principal">
+      <AspectRatio 
+        ratio={[13/9, , , 16/9]} 
+        w={[ "100%", ,"70%"]}
+        boxShadow="xl"
+        borderWidth={[8, , , 16]}
+        borderColor="primary.100"
+        borderStyle="solid"
+        transition={transitions.principal}
+        _groupHover={{
+          transform: 'scale(.92) rotateZ(-5.5deg)',
+        }}
+        >
+        <Image 
+          src={'https:' + url } 
+          alt={acessibilidade} 
+          layout="fill" 
+          objectFit="cover" 
+          objectPosition={ width === height ? 'top' : 'center'  }
+          />
+      </AspectRatio>
+      <Flex 
+        boxShadow="xl"
+        pos={["relative", , "absolute"]} 
+        right={0} 
+        top={[, , '4%', ,"8%" ]}
+        bottom={[, , , "8%" ]}
+        bgColor="grayBlue.100" 
+        py={5}
+        px={4}
         role="group"
-        gridArea="principal">
-        <PostImage
-        transition={transition.timer}
-        zIndex={zIndex.postImage}
-        imagemDestaque={imagemDestaque} />
-        <RibbonCategoria
-          pos="absolute"
-          zIndex={zIndex.ribbonText}
-          top="1rem"
-          left={-4}
-          colors={colors}
-          transition={transition.timer}
-          categorias={categorias} />
-        <RibbonCurve
-          zIndex={zIndex.ribbonCurve}
-          pos="absolute"
-          top={`2.4rem`}
-          colors={colors}
-          transition={transition.timer}
-          left={-4} />
-        <RibbonTitulo
-          pos="absolute"
-          zIndex={zIndex.ribbonText}
-          transition={transition}
-          colors={colors}
-          bottom="2.5rem"
-          left={-4}>{titulo}</RibbonTitulo>
-        <RibbonCurve
-          zIndex={zIndex.ribbonCurve}
-          colors={colors}
-          pos="absolute"
-          top={`2.4rem`}
-          left={-4} />
-        <BlockWithExcerpt
-          animation={animation}
-          excerpt={excerpt}
-          autor={autor}
-          colors={colors}
-          transition={transition} />
-      </Box>
-    </Link>
+        mt={[-28, , '', ,]}
+        mx={["auto", ,'' , '0', ]}
+        w={['80%', , "50%", "40%"]} 
+        h="auto"
+        
+        flexWrap="wrap"
+        transform="scale(.95)"
+        transition={transitions.principal}
+        _groupHover={{
+          transform: 'scale(1)',
+          bgColor: 'white'
+        }}>
+        <UnorderedList 
+          w="fit-content"
+          h={8}
+          pos="relative"
+          ml={-5}
+          pl={5}
+          pr={3}
+          pt="3px"
+          _before={{
+            content: '""',
+            pos: 'absolute',
+            top: 0,
+            bottom: 0,
+            left: -3,
+            h: 0,
+            w: 0,
+            borderLeftWidth: 8,
+            borderRightWidth: 8,
+            borderTopWidth: 18,
+            borderBottomWidth: 18,
+            borderStyle: "solid",
+            borderLeftColor: 'transparent',
+            borderRightColor: 'secondary.300',
+            borderTopColor: 'secondary.300',
+            borderBottomColor: 'secondary.300',
+          }}
+          _after={{
+            content: '""',
+            pos: 'absolute',
+            top: 0,
+            bottom: 0,
+            right: "-20px",
+            h: 0,
+            w: 0,
+            borderLeftWidth: 10,
+            borderRightWidth: 10,
+            borderTopWidth: 19,
+            borderBottomWidth: 18,
+            borderStyle: "solid",
+            borderLeftColor: 'secondary.300',
+            borderRightColor: 'transparent',
+            borderTopColor: 'transparent',
+            borderBottomColor: 'transparent',
+          }}
+          bgColor="secondary.300">
+          {categorias.map((categoria, i) => {
+            const { nome, slug } = categoria.fields
+            return (
+              <Link href={`/blog/categoria/${slug}`} key={i}>
+                <chakra.a
+                  color="primary.600"
+                  fontFamily="display"
+                  fontSize="sm"
+                  fontWeight="300"
+                  cursor="pointer"
+                  pb=".1275rem"
+                  borderBottomWidth={6}
+                  borderBottomStyle="solid"
+                  borderBottomColor="transparent"
+                  transition={transitions.links}
+                  _hover={{
+                    color: 'secondary.600',
+                    borderBottomColor: 'secondary.400'
+                    
+                  }}
+                  _notLast={{
+                    _after: {
+                      content: '","',
+                      h: '100%'
+                    },
+                    mr: 1
+                  }}
+                >
+                  {nome}
+                </chakra.a>
+              </Link>
+              )
+          })}
+        </UnorderedList>
+        <Spacer />
+        <Link href={slug}>
+          <Text 
+            as="span" 
+            ml="auto" 
+            mt={1}
+            flexBasis="30%" 
+            textAlign="right" 
+            fontFamily="display" 
+            cursor="pointer"
+            color="primary.300"><FormatData dataHora={dataHora}/></Text>
+        </Link>
+        <Stack mb={[8, , 0]} h="60%">
+          <Link href={`/blog/${slug}`}>
+          <Heading
+            as="h3"
+            color="primary.500"
+            fontWeight="600"
+            letterSpacing="tight"
+            fontSize="xl"
+            cursor="pointer"
+            >{titulo}</Heading>
+          </Link>
+          <Link href={`/blog/autor/${autor.fields.slug}`}>
+            <Text
+              as="span"
+              color="grayBlue.700"
+              fontWeight="400"
+              fontSize="sm"
+              cursor="pointer"
+              >Por: {autor.fields.nome}</Text>
+          </Link>
+          <Spacer flexBasis="100%" />
+          {documentToReactComponents(excerpt, {
+            renderMark: {
+              [MARKS.BOLD]: text => <Text as="b">{text}</Text>,
+              [MARKS.ITALIC]: text => <Text as="i">{text}</Text>,
+              [MARKS.UNDERLINE]: text => <Text as="u">{text}</Text>
+            },
+            renderNode: {
+              [BLOCKS.PARAGRAPH]: (_node, children) => (
+                <Text
+                  fontSize="md"
+                  lineHeight="1.3444em"
+                  fontFamily="body"
+                  color="grayBlue.700"
+                  fontWeight="300"
+                  >{children}</Text>
+              )
+            }
+          })}
+
+        </Stack>
+        <Spacer flexBasis="100%" />
+        <Link href={slug}>
+          <chakra.a
+            fontFamily="display"
+            fontWeight="400"
+            color="secondary.500"
+            cursor="pointer"
+            h="fit-content"
+            ml="auto"
+            alignSelf="flex-end"
+            transition={transitions.links}
+            _groupHover={{
+              _hover:{
+                color: 'primary.700'
+              },
+              color: 'primary.400'
+            }}
+          >Leia Mais</chakra.a>
+        </Link>
+      </Flex>
+    </Flex>
   );
 }
 

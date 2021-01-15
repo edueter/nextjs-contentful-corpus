@@ -27,7 +27,7 @@ const FisioHome = ({ secao }) => {
       [BLOCKS.PARAGRAPH]: (_node, children) => {
         return (
           <Text 
-            color="corpus-grayish-blue.700" 
+            color="grayBlue.700" 
             fontSize="sm"
             lineHeight="1.68em" 
             letterSpacing="normal"
@@ -62,7 +62,7 @@ const FisioHome = ({ secao }) => {
       [BLOCKS.PARAGRAPH]: (_node, children) => {
         return (
           <Text 
-            color="corpus-grayish-blue.700" 
+            color="grayBlue.700" 
             fontSize="md"
             lineHeight="1.45em" 
             fontFamily="display"
@@ -154,8 +154,8 @@ const FisioHome = ({ secao }) => {
         className="background--image"
         pos="absolute"
         zIndex="-50"
-        top={[,'18px', '-42px', '0',  '10']}
-        left={[,'-58%', '-44%', '-57%', '-50%']}
+        top={[,'-18px', '-42px', '0',  '10']}
+        left={[,'-58%', '-44%', '-57%', '-46%']}
         width={[,'85%', '69%', '80%', '70%']}
         ratio={1400/996}>
         <Image 

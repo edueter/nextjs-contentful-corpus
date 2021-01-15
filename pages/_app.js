@@ -43,7 +43,7 @@ const theme = extendTheme({
       800: '#6C6C68',
       900: '#484845',
     },
-    'corpus-baby-blue': {
+    babyBlue: {
       100: '#F6FAFF',
       200: '#E8F3FE',
       300: '#DAECFD',
@@ -54,7 +54,7 @@ const theme = extendTheme({
       800: '#495E71',
       900: '#313E4B',
     },
-    'corpus-grayish-blue': {
+    grayBlue: {
       100: '#EFF3F7',
       200: '#D7E2EC',
       300: '#BED1E0',
@@ -85,7 +85,94 @@ const theme = extendTheme({
     display: "Rubik, sans-serif",
     body: "Open Sans, sans-serif"
   },
+  components: {
+    Heading: {
+      baseStyle: {
+        fontFamily: 'display',
+        fontWeight: '400',
+        color: 'primary.500',
+        letterSpacing: 'tight'
+      }
+    },
+    Button: {
+      baseStyle: {
+        fontFamily: 'display',
+        fontWeight: '300',
+        letterSpacing: 'wider',
+        borderRadius: 'sm',
+        py: 4,
+        px: 6,
+      }
+    },
+    Input: {
+      baseStyle: {
+        fontFamily: 'display',
+        borderColor: 'primary.500',
+        variant: 'flushed',
+        color: 'primary.500'
+      },
+      variants: {
+        flushed: {
+          field: {
+            borderColor: 'primary.500',
+            pl: 1
+          }
+        }
+      },
+      defaultProps: {
+        size: 'md',
+        variant: 'flushed',
+      },
+    },
+    Textarea: {
+      baseStyle: {
+        fontFamily: 'display',
+        color: 'primary.500',
+        borderColor: 'primary.500',
+        _placeholder: {
+          color: 'primary.500'
+        }
+      },
+      variants: {
+        flushed: {
+          field: {
+            borderColor: 'primary.500',
+          },
+        }
+      },
+      defaultProps: {
+        size: 'md',
+        variant: 'flushed',
+      },
+    },
+    Select: {
+      baseStyle: {
+        fontFamily: 'display',
+        color: 'primary.500',
+        borderColor: 'primary.500',
+        variant: 'flushed',
+        _placeholder: {
+          color: 'primary.500'
+        },
+      },
+      variants: {
+        flushed: {
+          field: {
+            borderColor: 'primary.500',
+            pl: 1,
+            color: 'primary.500',
+          },
+          
+        }
+      },
+      defaultProps: {
+        size: 'md',
+        variant: 'flushed',
+      },
+    }
+  },
   styles: {
+    
     global: {
       'html': {
         fontSize: "18px",
