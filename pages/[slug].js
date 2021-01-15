@@ -33,7 +33,6 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Pagina({ pagina }) {
-  console.log(pagina)
   if (!pagina) return <div>404</div>
   return (
     <div>

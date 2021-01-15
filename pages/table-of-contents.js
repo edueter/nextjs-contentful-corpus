@@ -20,7 +20,7 @@ export async function getStaticProps() {
 }
 
 export default function Home({ paginas }) {
-  console.log('paginas')
+  // console.log('paginas')
   return (
     <div>
       <Head>

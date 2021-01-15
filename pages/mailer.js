@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 
-export default () => {
+export default function Mailer() {
   const [status, setStatus] = useState({
     submitted: false,
     submitting: false,
@@ -64,4 +64,40 @@ export default () => {
         handleServerResponse(false, error.response.data.error)
       })
   }
+  return (
+    <main>
+      <h1>React and Formspree</h1>
+      <hr />
+      <form onSubmit={handleOnSubmit}>
+        <label htmlFor="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          name="_replyto"
+          onChange={handleOnChange}
+          required
+          value={inputs.email}
+        />
+        <label htmlFor="message">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          onChange={handleOnChange}
+          required
+          value={inputs.message}
+        />
+        <button type="submit" disabled={status.submitting}>
+          {!status.submitting
+            ? !status.submitted
+              ? 'Submit'
+              : 'Submitted'
+            : 'Submitting...'}
+        </button>
+      </form>
+      {status.info.error && (
+        <div className="error">Error: {status.info.msg}</div>
+      )}
+      {!status.info.error && status.info.msg && <p>{status.info.msg}</p>}
+    </main>
+  )
 }
