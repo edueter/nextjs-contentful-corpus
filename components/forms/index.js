@@ -128,12 +128,6 @@ const Form = ({ comp }) => {
     const { control, handleSubmit } = useForm();
     const onSubmit = data => console.log(data);
 
-    var email = {
-      from: ,
-      to: destinatario 
-    }
-
-
     return (
       <form id={formId}>
         <Stack spacing={8}>
