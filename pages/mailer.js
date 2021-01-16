@@ -1,32 +1,103 @@
-import nodemailer from 'nodemailer'
-import { Button } from '@chakra-ui/react';
+import { useState } from 'react'
+import axios from 'axios'
 
-var transporte = nodemailer.createTransport({
-  service: 'Gmail',
-  port: 587,
-  secure: true,
-  auth: {
-    user: process.env.NEXT_PUBLIC_GMAIL_AUTH_LOGIN,
-    PASS: process.env.NEXT_PUBLIC_GMAIL_AUTH_PASSWD
+export default function Mailer() {
+  const [status, setStatus] = useState({
+    submitted: false,
+    submitting: false,
+    info: {
+      error: false,
+      msg: null
+    }
+  })
+  const [inputs, setInputs] = useState({
+    email: '',
+    message: '',
+  })
+  const handleServerResponse = (ok, msg) => {
+    if (ok) {
+      setStatus({
+        submitted: true,
+        submitting: false,
+        info: { error: false, msg: msg }
+      })
+      setInputs({
+        email: '',
+        message: '',
+      })
+    } else {
+      setStatus({
+        info: { error: true, msg: msg }
+      })
+    }
   }
-});
-
-var email = {
-  from: 'eduardo@eter.ppg.br',
-  to: 'eduardo.o.carvalho@gmail.com',
-  subject: 'Node.js ♥ unicode', 
-  html: 'E-mail foi enviado do <strong>Node.js</strong>'
+  const handleOnChange = (e) => {
+    e.persist()
+    setInputs((prev) => ({
+      ...prev,
+      [e.target.id]: e.target.value,
+    }))
+    setStatus({
+      submitted: false,
+      submitting: false,
+      info: {
+        error: false,
+        msg: null
+      },
+    })
+  }
+  const handleOnSubmit = (e) => {
+    e.preventDefault()
+    setStatus((prevStatus) => ({ ...prevStatus, submitting: true }))
+    axios({
+      method: 'POST',
+      url: 'https://formspree.io/[your-formspree-endpoint]',
+      data: inputs,
+    })
+      .then((response) => {
+        handleServerResponse(
+          true,
+          'Thank you, your message has been submitted.'
+        )
+      })
+      .catch((error) => {
+        handleServerResponse(false, error.response.data.error)
+      })
+  }
+  return (
+    <main>
+      <h1>React and Formspree</h1>
+      <hr />
+      <form onSubmit={handleOnSubmit}>
+        <label htmlFor="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          name="_replyto"
+          onChange={handleOnChange}
+          required
+          value={inputs.email}
+        />
+        <label htmlFor="message">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          onChange={handleOnChange}
+          required
+          value={inputs.message}
+        />
+        <button type="submit" disabled={status.submitting}>
+          {!status.submitting
+            ? !status.submitted
+              ? 'Submit'
+              : 'Submitted'
+            : 'Submitting...'}
+        </button>
+      </form>
+      {status.info.error && (
+        <div className="error">Error: {status.info.msg}</div>
+      )}
+      {!status.info.error && status.info.msg && <p>{status.info.msg}</p>}
+    </main>
+  )
 }
-
-const submit = transporte.sendMail(email, function(err, info){
-  if(err)
-    throw err;
-
-  console.log('Email enviado! Leia as informações adicionais: ', info)
-})
-
-const Mailer = () => {
-  return <Button onSubmit={submit} />
-}
-
-export default Mailer

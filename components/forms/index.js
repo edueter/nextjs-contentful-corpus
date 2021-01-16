@@ -1,13 +1,8 @@
 import { useState } from 'react'
 import { Stack, Button, Text, Textarea, Input, Select } from '@chakra-ui/react'
 import { useForm, Controller } from 'react-hook-form'
-import { transporte } from '../../helpers/mailer/transporte'
 
 
-const transitions = {
-  input: 'all .25s .15s ease-in-out',
-  textarea: 'border .25s .15s ease-in-out'
-}
 
 const Required = ({ msgRequired }) => {
   return (
@@ -129,7 +124,7 @@ const Form = ({ comp }) => {
     const onSubmit = data => console.log(data);
 
     return (
-      <form id={formId}>
+      <form id={formId} action={`https://formspree.io/f/${formId}`}>
         <Stack spacing={8}>
           {input.map((inputField, i) => {
             const { id } = inputField.sys.contentType.sys

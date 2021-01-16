@@ -49,8 +49,8 @@ export default function Home({ pagina, posts }) {
       <Layout id={slug}>
         <Whatsapp />
         {secoes.map((secao) => {
-          console.log(">> Seção " + secao.fields.slug)
-          console.log(secao)
+          // console.log(">> Seção " + secao.fields.slug)
+          // console.log(secao)
           return <SectionRenderer key={secao.fields.slug} secao={secao} posts={posts} />
         })}
       </Layout>

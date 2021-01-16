@@ -5,8 +5,8 @@ import { Grid, Heading, SimpleGrid, Flex, GridItem, Stack, Skeleton, SkeletonTex
 import { Container } from "../components/layout"
 
 export default function Blog({ posts }) {
-  console.log("Conteúdo de posts")
-  console.log(posts)
+  // console.log("Conteúdo de posts")
+  // console.log(posts)
 
   const stdGap = 4
 
